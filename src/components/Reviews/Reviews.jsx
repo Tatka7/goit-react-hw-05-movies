@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useContexFetch } from '../../services/useContext';
 import { useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader';
 import axios from 'axios';
 
 import { List, Author, Text, Title } from './Reviews.styled';
@@ -14,6 +15,8 @@ export default function Reviews() {
   useEffect(() => {
     const fetchReviews = async movieId => {
       try {
+        setReviews([]);
+        setError('');
         const response = await axios
           .get(`${url}movie/${movieId}/reviews?${key}&language=en-US&page=1`)
           .then(res => {
@@ -33,17 +36,19 @@ export default function Reviews() {
 
   return (
     <>
-      {error && <Title>{error}</Title>}
-      {reviews.length > 0 && (
-        <List>
-          {reviews.map(review => (
-            <li key={review.id}>
-              <Author>Author: {review.author_details.username}</Author>
-              <Text>{review.content}</Text>
-            </li>
-          ))}
-        </List>
-      )}
+      <Suspense fallback={<Loader />}>
+        {error && <Title>{error}</Title>}
+        {reviews.length > 0 && (
+          <List>
+            {reviews.map(review => (
+              <li key={review.id}>
+                <Author>Author: {review.author_details.username}</Author>
+                <Text>{review.content}</Text>
+              </li>
+            ))}
+          </List>
+        )}
+      </Suspense>
     </>
   );
 }

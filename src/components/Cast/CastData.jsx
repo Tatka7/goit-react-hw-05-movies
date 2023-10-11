@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { List, Image, Character, Name, Wrapper } from './Cast.styled';
+import { List, ListItem, Image, Character, Name, Wrapper } from './Cast.styled';
 
 export default function CastData({ cast }) {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
@@ -10,7 +10,7 @@ export default function CastData({ cast }) {
   return (
     <List>
       {cast.map(actor => (
-        <li key={actor.cast_id}>
+        <ListItem key={actor.cast_id}>
           <Image
             src={
               actor.profile_path ? IMAGE_URL + actor.profile_path : defaultImage
@@ -19,13 +19,13 @@ export default function CastData({ cast }) {
           />
           <Character>
             <Name>
-              <Wrapper>Name:</Wrapper> {actor.name}
+              <Wrapper></Wrapper> {actor.name}
             </Name>
             <Name>
-              <Wrapper>Character:</Wrapper> {actor.character}
+              <Wrapper></Wrapper> {actor.character}
             </Name>
           </Character>
-        </li>
+        </ListItem>
       ))}
     </List>
   );

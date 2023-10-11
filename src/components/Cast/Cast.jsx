@@ -1,7 +1,8 @@
-import { useState, useEffect, lazy } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useContexFetch } from '../../services/useContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Loader } from 'components/Loader';
 
 import { Title } from './Cast.styled';
 
@@ -16,6 +17,8 @@ export default function Cast() {
   useEffect(() => {
     const fetchCast = async movieId => {
       try {
+        setCast([]);
+        setError('');
         const response = await axios
           .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
           .then(res => {
@@ -36,7 +39,11 @@ export default function Cast() {
   return (
     <>
       {error && <Title>{error}</Title>}
-      {cast.length > 0 && <CastData cast={cast} />}
+      {cast.length > 0 && (
+        <Suspense fallback={<Loader />}>
+          <CastData cast={cast} />
+        </Suspense>
+      )}
     </>
   );
 }

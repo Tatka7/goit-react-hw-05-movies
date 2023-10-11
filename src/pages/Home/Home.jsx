@@ -1,5 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import * as API from '../../services/tmdb-api';
+import { Loader } from 'components/Loader';
 
 import { Title } from './Home.styled';
 
@@ -27,7 +28,7 @@ export default function Home() {
       <Title>Tranding today</Title>
       {error && <h2>{error}</h2>}
       {trending.length > 0 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <MoviesList movies={trending} />
         </Suspense>
       )}

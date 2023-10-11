@@ -4,8 +4,8 @@ export const Loader = ({ pending }) => {
   return (
     <Dna
       visible={true}
-      height="500"
-      width="700"
+      height="600"
+      width="1100"
       ariaLabel="dna-loading"
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"

@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useContexFetch } from '../../services/useContext';
 import { useParams, Outlet } from 'react-router-dom';
+import { Loader } from '../../components/Loader';
 
 import axios from 'axios';
 
@@ -9,7 +10,6 @@ import {
   MovieLink,
   AdditionalData,
   Span,
-  Loading,
 } from './MovieDetails.styled';
 
 import MovieData from '../../components/MoviesList/MovieData';
@@ -51,7 +51,7 @@ export default function MovieDetails() {
           </ListItem>
         </ul>
       </AdditionalData>
-      <Suspense fallback={<Loading>Loading...</Loading>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>

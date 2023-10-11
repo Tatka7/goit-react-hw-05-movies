@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useContexFetch } from '../../services/useContext';
 import { ToastContainer, toast } from 'react-toastify';
+import { Loader } from 'components/Loader';
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,7 +70,7 @@ export default function Movies() {
       </form>
       {error && <h2>{error}</h2>}
       {movies.length !== 0 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <MoviesList movies={movies} />
         </Suspense>
       )}

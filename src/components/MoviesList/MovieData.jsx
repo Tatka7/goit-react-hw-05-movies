@@ -4,15 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { yearTransform } from '../../services/dateTransform';
 
 import { BackButton, Container, Poster, MovieInfo } from './MovieData.styled';
-
+const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
+const defaultImage = 'https://i.postimg.cc/Kj28Cmn0/default-movie-800x800.jpg';
+// console.log(movie);
 export default function MovieData({ movie }) {
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/movies');
-
-  const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
-  const defaultImage =
-    'https://i.postimg.cc/Kj28Cmn0/default-movie-800x800.jpg';
-  console.log(movie);
 
   const genresMap = array => {
     return array
